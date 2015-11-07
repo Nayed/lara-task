@@ -3,6 +3,10 @@
 use App\Task;
 use Illuminate\Http\Request;
 
+Route::get('/', function() {
+    return view('welcome');
+});
+
 // Authentication Routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
