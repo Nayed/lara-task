@@ -46,25 +46,24 @@
 
                     <div class="panel-body">
                         <table class="table table-striped task-table">
+
+                            <!-- Table Headings -->
                             <thead>
                                 <th>Task</th>
                                 <th>&nbsp;</th>
                             </thead>
+
+                            <!-- Table Body -->
                             <tbody>
                                 @foreach ($tasks as $task)
                                     <tr>
-                                        <td class="table-text"><div>{{ $task->name }}</div></td>
+                                        <!-- Task Name -->
+                                        <td class="table-text">
+                                            <div>{{ $task->name }}</div>
+                                        </td>
 
-                                        <!-- Task Delete Button -->
                                         <td>
-                                            <form action="/task/{{ $task->id }}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <button type="submit" id="delete-task-{{ $task->id }}" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
-                                                </button>
-                                            </form>
+                                            <!-- TODO: Delete Button -->
                                         </td>
                                     </tr>
                                 @endforeach

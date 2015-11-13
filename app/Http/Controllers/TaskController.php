@@ -7,18 +7,41 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Task;
+use App\Repositories\TaskRepository;
 
 class TaskController extends Controller
 {
-    public function __construct()
+    /**
+     * The task repository instance
+     * 
+     * @var TaskRepository
+     */  
+    protected $tasks;
+
+    /**
+     * Create a new controller instance
+     * 
+     * @param TaskRepository $tasks
+     * @return void
+     */ 
+    public function __construct(TaskRepository $tasks)
     {
         $this->middleware('auth');
+
+        $this->tasks = $tasks;
     }
 
+    /**
+     * Display a list of all of the user's task
+     * 
+     * @param Request $request
+     * @return Response
+     */ 
     public function index(Request $request)
     {
-        $tasks = Task::where('user_id', $request->user()->id)->get();
-        return view('tasks.index', compact('tasks'));
+        return view('tasks.index', [
+            'tasks' => $this->tasks->forUser($request->user())
+        ]);
     }
 
 
